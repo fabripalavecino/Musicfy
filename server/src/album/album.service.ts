@@ -1,7 +1,6 @@
 import { BadRequestException, HttpException, HttpStatus, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { AlbumOutputDto } from './dto/album.output.dto';
 import { CreateAlbumDto } from './dto/create-album.dto';
 import { UpdateAlbumDto } from './dto/update-album.dto';
 import { Album } from './entities/album.entity';
@@ -48,6 +47,14 @@ export class AlbumService {
       return albums;
     } catch (error) {
       throw error;
+    }
+  }
+
+  findSongs(album_id) {
+    try {
+      
+    } catch (error) {
+      
     }
   }
 
