@@ -40,7 +40,7 @@ const List = () => {
 
     
     const renderedAlbums = albums.map((album) => {
-        return <AlbumDetails onEdit={onEdit} onDelete={onDelete} key={album.id} id={album.id} name={album.name} musician={album.musician} year={album.year} url={album.urlImage} />
+        return <AlbumDetails onEdit={onEdit} onDelete={onDelete} key={album.id} id={album.id} name={album.name} musician={album.musician} year={album.year} url={album.urlImage} songs={album.songs} />
     })
 
     return(
