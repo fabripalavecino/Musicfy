@@ -50,9 +50,13 @@ export class AlbumService {
     }
   }
 
-  findSongs(album_id) {
+  async findSongs(id) {
     try {
-      
+      const album = await this.AlbumRepository.findOne({ where: { id } });
+      if(!album) {
+        throw new NotFoundException(`Not Album found with id ${id}`);
+      }
+      return album.songs;
     } catch (error) {
       
     }

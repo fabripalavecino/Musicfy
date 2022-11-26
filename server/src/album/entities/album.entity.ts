@@ -15,6 +15,6 @@ export class Album {
     urlImage: string;
     @DeleteDateColumn({ nullable: true })
     deleteAt: Date;
-    @OneToMany(() => Song, song => song.album)
-    songs: Song[]
+    @OneToMany(() => Song, song => song.album, { nullable: true, eager: true })
+    songs?: Song[]
 }

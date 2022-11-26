@@ -1,4 +1,12 @@
+import { useContext } from "react"
+import { useNavigate, generatePath } from "react-router-dom"
+import { AppContext } from "../context/AppContext"
+
 const AlbumDetails = ({ id, name, musician, year, url, songs, onDelete, onEdit }) => {
+
+    const navigate = useNavigate()
+
+    const { setAlbumId, setSongs } = useContext(AppContext);
 
 
     function handleDelete(id) {
@@ -9,9 +17,17 @@ const AlbumDetails = ({ id, name, musician, year, url, songs, onDelete, onEdit }
         onEdit(id)
     }
 
-    const handleClick = (e) => {
-        e.preventDefault();
+    const handleClick = (e, id) => {
+        e.preventDefault()
+        setSongs(songs)
+        navigate(generatePath('/album/:id/songs',{ id }))
         
+    }
+
+    const handleAddSongs = () => {
+        setAlbumId(id);
+        navigate('/song')
+
     }
 
 
@@ -19,16 +35,22 @@ const AlbumDetails = ({ id, name, musician, year, url, songs, onDelete, onEdit }
     return (
         <div className="ui card">
             <div className="content">
-                <h3 className="ui header">Album's Name: {name} </h3>
-                <h3 className="ui header">Musician: {musician}</h3>
-                <h3 className="ui header">Year of release: {year}</h3>
+                <h4 className="ui">Album's Name: </h4>
+                <div>{name}</div> 
+                <hr/> 
+                <h4 className="ui">Musician: </h4>
+                <div>{musician}</div>
+                <hr/> 
+                <h4 className="ui">Release's Year: </h4>
+                <div>{year}</div>
             </div>
             <div className="extra content">
-                <a href="" onClick={handleClick}><i aria-hidden="true" className="music icon"></i>22 Friends</a>
+                <h3><a href="" onClick={(e) => handleClick(e, id)}><i aria-hidden="true" className="music icon"></i>List Songs</a></h3>
             </div>
             <div className="image">
                 <img src={url} alt={name} style={{ marginBottom: '10px'}}/>
             </div>
+            <button className="ui blue button" onClick={() => handleAddSongs(id)}>Add Song</button>
             <button className="ui positive button"  onClick={() => handleEdit(id)}>Edit</button>
             <button className="ui negative button"  onClick={() => handleDelete(id)} >Delete</button>            
         </div>
