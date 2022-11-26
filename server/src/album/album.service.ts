@@ -1,7 +1,6 @@
 import { BadRequestException, HttpException, HttpStatus, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { AlbumOutputDto } from './dto/album.output.dto';
 import { CreateAlbumDto } from './dto/create-album.dto';
 import { UpdateAlbumDto } from './dto/update-album.dto';
 import { Album } from './entities/album.entity';
@@ -48,6 +47,18 @@ export class AlbumService {
       return albums;
     } catch (error) {
       throw error;
+    }
+  }
+
+  async findSongs(id) {
+    try {
+      const album = await this.AlbumRepository.findOne({ where: { id } });
+      if(!album) {
+        throw new NotFoundException(`Not Album found with id ${id}`);
+      }
+      return album.songs;
+    } catch (error) {
+      
     }
   }
 

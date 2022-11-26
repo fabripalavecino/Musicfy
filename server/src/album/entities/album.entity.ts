@@ -1,4 +1,5 @@
-import { Column, DeleteDateColumn, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Song } from "src/song/entities/song.entity";
+import { Column, DeleteDateColumn, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Album {
@@ -14,4 +15,6 @@ export class Album {
     urlImage: string;
     @DeleteDateColumn({ nullable: true })
     deleteAt: Date;
+    @OneToMany(() => Song, song => song.album, { nullable: true, eager: true })
+    songs?: Song[]
 }

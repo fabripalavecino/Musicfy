@@ -5,6 +5,8 @@ import { AlbumModule } from './album/album.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Album } from './album/entities/album.entity';
+import { SongModule } from './song/song.module';
+import { Song } from './song/entities/song.entity';
 
 @Module({
   imports: [
@@ -22,7 +24,7 @@ import { Album } from './album/entities/album.entity';
           database: config.get('TYPEORM_DATABASE'),
           username: config.get('TYPEORM_USERNAME'),
           password: config.get<string>('TYPEORM_PASSWORD'),
-          entities: [Album],
+          entities: [Album, Song],
           autoLoadEntities: true,
           synchronize:
             config.get('TYPEORM_SYNCHRONIZE') == 'true' ? true : false,
@@ -36,6 +38,7 @@ import { Album } from './album/entities/album.entity';
       },
     }),
     AlbumModule,
+    SongModule,
   ],
   controllers: [AppController],
   providers: [AppService],
