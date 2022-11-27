@@ -12,3 +12,12 @@ export const createSong = async (name, duration, album_id)  => {
         throw error;
     }
 }
+
+export const deleteSong = async(id) => {
+    try {
+        const response = await axiosInstance.delete(`/song/${id}`);
+        return response;
+    } catch (error) {
+        throw error;
+    }
+}

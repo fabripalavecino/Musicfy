@@ -57,3 +57,12 @@ export const deleteAlbum = async (id) => {
         throw error;
     }
 }
+
+export const findSongs = async (id) => {
+    try {
+        const response = await axiosInstance(`/album/${id}/songs`)
+        return response;
+    } catch (error) {
+        throw error;
+    }
+}
