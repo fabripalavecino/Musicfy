@@ -3,11 +3,12 @@ import { AppContext } from "../context/AppContext";
 import { useContext } from "react";
 import Swal from 'sweetalert2';
 import { deleteSong } from "../services/songService";
+import { generatePath, useNavigate } from "react-router-dom";
 
 const ListSongs = () => {
 
-
-    const { songs, setSongs } = useContext(AppContext);
+    const navigate = useNavigate();
+    const { songs, setSongs, albumId } = useContext(AppContext);
 
 
     const onDelete = (id) => {
@@ -22,7 +23,7 @@ const ListSongs = () => {
     }
 
     const onEdit = (id) => {
-        
+        navigate(generatePath(`/album/${albumId}/songs/${id}`));
     }
 
 

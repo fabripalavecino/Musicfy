@@ -1,6 +1,5 @@
-import { useState, useRef, useContext } from "react";
-import { AppContext } from "../context/AppContext";
-import { createSong } from "../services/songService";
+import { useState, useRef } from "react";
+
 
 
 const initialValues = {
@@ -8,11 +7,10 @@ const initialValues = {
     duration: 0.0
 }
 
-const AddSong = () => {
+const FormSong = ({ FormText, ButtonText, onSubmit }) => {
 
     const [values, setValues] = useState(initialValues);
 
-    const { albumId } = useContext(AppContext);
 
     const ref = useRef();
 
@@ -25,21 +23,14 @@ const AddSong = () => {
     };
 
     const handleSubmit = async (e) => {
-        try {
-            e.preventDefault()
-            const resp = await createSong(values.name, values.duration, albumId)
-            if(resp.status === 201) {
-                alert('exito')
-            }
-    
-        } catch (error) {
-            throw error;
-        }
+        e.preventDefault();
+        onSubmit(values);
+        setValues(initialValues);
     }
 
     return(
         <div>
-            <h2>Add Song To Album</h2>
+            <h2>{FormText}</h2>
             <form ref={ref} className="ui form" style={{ marginBottom: '10px' }} onSubmit={handleSubmit}>
                 <div className="field">
                     <label>Enter Name</label>
@@ -49,10 +40,10 @@ const AddSong = () => {
                     <label>Enter Duration</label>
                     <input value={values.duration} onChange={handleInputChange} name='duration' />
                 </div>
-                <button type="submit" className="ui button primary">Add Song</button> 
+                <button type="submit" className="ui button primary">{ButtonText}</button> 
             </form>
         </div>
     )
 }
 
-export default AddSong;
+export default FormSong;
