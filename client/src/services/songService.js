@@ -21,3 +21,12 @@ export const deleteSong = async(id) => {
         throw error;
     }
 }
+
+export const updateSong = async(id, { name, duration }) => {
+    try {
+        const response = await axiosInstance.patch(`/song/${id}`, { name , duration })
+        return response;
+    } catch (error) {
+        throw error;
+    }
+}

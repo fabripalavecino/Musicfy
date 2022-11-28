@@ -21,7 +21,7 @@ const List = () => {
 
     const onDelete = (id) => {
         Swal.fire({
-            title: "Are you sure you want to delet this item?",
+            title: "Are you sure you want to delet this Album?",
             text: "You will not be able to recover your data!",
             type: "warning",
             showCancelButton: true,
